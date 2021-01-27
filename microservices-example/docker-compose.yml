@@ -1,0 +1,30 @@
+version : '3'
+
+services:
+    # Here we have 5 services
+    lb:
+        image: haproxy
+        ports:
+            - "8080:8080"
+        # Map path of 'haproxy' main root folder of app to constsant into a container '/usr/local/etc/haproxy'
+        volumes:
+            - ./haproxy:/usr/local/etc/haproxy
+    nodeapp1:
+        # nodeapp image that we have built with 'docker build -t nodeapp .'
+        image: nodeapp
+        # Application with ID 1111, which will be also used for port
+        environment:
+            - APPID=1111
+    nodeapp2:
+        image: nodeapp
+        environment:
+            - APPID=2222
+    nodeapp3:
+        image: nodeapp
+        environment:
+            - APPID=3333
+    nodeapp4:
+        image: nodeapp
+        environment:
+            - APPID=4444
+        
